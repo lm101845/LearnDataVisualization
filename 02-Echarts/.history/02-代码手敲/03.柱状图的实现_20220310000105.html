@@ -1,0 +1,85 @@
+<!--
+ * @Author: liming
+ * @Date: 2022-03-09 23:29:46
+ * @LastEditTime: 2022-03-09 23:29:46
+ * @FilePath: \02-Echarts\02-代码手敲\03.柱状图的实现.html
+-->
+<!-- 
+    1. ECharts最基本的代码结构
+    2. x轴数据:['张三', '李四', '王五', '闰土', '小明', '茅台', '二妞', '大强']
+    3. y轴数据:[88, 92, 63, 77, 94, 80, 72, 86]
+    4. 将type的值设置为bar
+ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 1.引入 -->
+    <script src="lib/echarts.min.js"></script>
+</head>
+
+<body>
+    <!-- 2.准备盒子 -->
+    <div style="width: 600px;height:400px"></div>
+    <script>
+        // 3.初始化echarts实例对象
+        let myCharts = echarts.init(document.querySelector("div"))
+
+        let xDataArr = ['张三', '李四', '王五', '闰土', '小明', '茅台', '二妞', '大强']
+        let yDataArr = [88, 92, 63, 77, 94, 80, 72, 86]
+            //4.准备配置项——除了这一步，其他代码都是一模一样的
+            //option就配置3个东西：x轴，y轴，series
+            //其中x,y都是对象,而series是一个数组，数组里面是一个一个对象
+        let options = {
+                //x轴是分类轴
+                xAxis: {
+                    type: 'category',
+                    data: xDataArr
+                },
+                //y轴是数值轴,data可以不写在y轴上面，因为y轴的数据是由series决定的
+                yAxis: {
+                    type: 'value'
+                },
+                series: [{
+                    name: '语文',
+                    type: 'bar', //bar表示柱状图
+                    data: yDataArr,
+                    //最大值\最小值  markPoint
+                    markPoint: {
+                        data: [{
+                            type: 'max',
+                            name: '最大值'
+                        }, {
+                            type: 'min',
+                            name: '最小值'
+                        }]
+                    },
+                    //平均值  markLine
+                    markLine: {
+                        data: [{
+                            type: 'average',
+                            name: '平均值'
+                        }]
+
+                    },
+                    //数值显示  label
+                    label: {
+                        show: true,
+                        rotate: 30, // 旋转角度
+                        //position: 'top', // 标签的位置
+                    },
+                    //柱宽度  barWidth
+                    barWidth: '30%',
+
+                }]
+            }
+            //5.将配置项设置给echarts实例对象
+        myCharts.setOption(options)
+    </script>
+</body>
+
+</html>
