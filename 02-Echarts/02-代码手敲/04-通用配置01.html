@@ -1,0 +1,71 @@
+<!--
+ * @Author: liming
+ * @Date: 2022-03-09 23:37:36
+ * @LastEditTime: 2022-03-09 23:37:36
+ * @FilePath: \02-Echarts\02-代码手敲\00.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 1.引入 -->
+    <script src="lib/echarts.min.js"></script>
+</head>
+
+<body>
+    <!-- 2.准备盒子 -->
+    <div style="width: 600px;height:400px"></div>
+    <script>
+        // 3.初始化echarts实例对象
+        let myCharts = echarts.init(document.querySelector("div"))
+        var xDataArr = ['张三', '李四', '王五', '闰土', '小明', '茅台', '二妞', '大强']
+        var yDataArr = [88, 92, 63, 77, 94, 80, 72, 86]
+            //4.准备配置项——除了这一步，其他代码都是一模一样的
+        let options = {
+                xAxis: {
+                    type: 'category',
+                    data: xDataArr,
+                },
+                yAxis: {
+                    type: 'value'
+                },
+                series: [{
+                    name: '语文',
+                    type: 'bar', //bar表示柱状图
+                    data: yDataArr,
+                }],
+                title: {
+                    text: '成绩展示',
+                    textStyle: {
+                        color: '#f00'
+                    },
+                    borderWidth: 5, //5像素的标题边框
+                    borderColor: 'blue', //标题边框颜色
+                    borderRadius: 5,
+                    top: 10,
+                    left: 50,
+                },
+                //提示框组件
+                tooltip: {
+                    trigger: 'axis',
+                    // triggerOn: 'mousemove',
+                    triggerOn: 'click',
+                    // formatter: '哈哈'
+                    // formatter: '{b}的成绩是{c}'
+                    formatter: function(arg){
+                        console.log(arg);
+                        return arg[0].name + '的成绩是' + arg[0].data
+                    }
+                }
+
+            }
+            //5.将配置项设置给echarts实例对象
+        myCharts.setOption(options)
+    </script>
+</body>
+
+</html>
