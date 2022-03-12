@@ -1,0 +1,51 @@
+<!--
+ * @Author: liming
+ * @Date: 2022-03-12 16:30:30
+ * @LastEditTime: 2022-03-12 16:38:11
+ * @FilePath: \02-Echarts\02-代码手敲\08.折线图的常见效果_堆叠图.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="lib/echarts.min.js"></script>
+</head>
+
+<body>
+    <div style="width: 600px;height: 400px"></div>
+    <script>
+        var mCharts = echarts.init(document.querySelector("div"))
+        var xDataArr = ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']
+        var yDataArr1 = [3000, 2800, 900, 1000, 800, 700, 1400, 1300, 900, 1000, 800, 600]
+        var yDataArr2 = [2000, 3800, 1900, 500, 900, 1700, 2400, 300, 1900, 1500, 1800, 200]
+            //一张图表是可以有很多维度的展示的 
+        var option = {
+            xAxis: {
+                type: 'category',
+                data: xDataArr
+            },
+            yAxis: {
+                type: 'value',
+            },
+            series: [{
+                type: 'line',
+                data: yDataArr1,
+                //数据堆叠，同个类目轴上系列配置相同的stack值后，后一个系列的值会在前一个系列的值上相加。
+                stack: 'all', // 堆叠图的设置
+                areaStyle: {}
+            }, {
+                type: 'line',
+                data: yDataArr2,
+                stack: 'all', // 堆叠图的设置
+                areaStyle: {}
+            }]
+        }
+        mCharts.setOption(option)
+    </script>
+</body>
+
+</html>

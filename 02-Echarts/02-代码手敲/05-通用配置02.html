@@ -1,0 +1,77 @@
+<!--
+ * @Author: liming
+ * @Date: 2022-03-09 23:37:36
+ * @LastEditTime: 2022-03-12 15:00:45
+ * @FilePath: \02-Echarts\02-代码手敲\05-通用配置02.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 1.引入 -->
+    <script src="lib/echarts.min.js"></script>
+</head>
+
+<body>
+    <!-- 2.准备盒子 -->
+    <div style="width: 600px;height:400px"></div>
+    <script>
+        // 3.初始化echarts实例对象
+        let myCharts = echarts.init(document.querySelector("div"))
+        var xDataArr = ['张三', '李四', '王五', '闰土', '小明', '茅台', '二妞', '大强']
+        var yDataArr1 = [88, 92, 63, 77, 94, 80, 72, 86] //语文成绩
+        var yDataArr2 = [68, 62, 68, 27, 84, 53, 25, 100] //数学成绩
+            //4.准备配置项——除了这一步，其他代码都是一模一样的
+        let options = {
+                xAxis: {
+                    type: 'category',
+                    data: xDataArr
+                },
+                yAxis: {
+                    type: 'value'
+                },
+                series: [{
+                    name: '语文',
+                    data: yDataArr1,
+                    type: 'bar'
+                    // type: 'line'
+                }, {
+                    name: '数学',
+                    data: yDataArr2,
+                    type: 'bar'
+                    // type: 'line'
+                }],
+                legend:{
+                    data:['语文','数学']
+                    //legend中的data值需要和series中的name值一一对应
+                },
+                title: {
+                    text: '成绩展示'
+                },
+                tooltip: {
+                    trigger: 'axis',
+                },
+                toolbox: {
+                    feature: {
+                        //里面什么都不需要写
+                        saveAsImage: {}, // 导出图片
+                        dataView: {}, // 数据视图
+                        restore: {}, // 还原
+                        dataZoom: {}, // 数据区域缩放
+                        //动态图表类型的切换
+                        magicType: {
+                            type: ['line', 'bar']
+                        },
+                    }
+                }
+            }
+            //5.将配置项设置给echarts实例对象
+        myCharts.setOption(options)
+    </script>
+</body>
+
+</html>

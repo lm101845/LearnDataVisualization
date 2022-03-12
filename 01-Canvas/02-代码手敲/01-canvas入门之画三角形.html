@@ -1,0 +1,65 @@
+<!--
+ * @Author: liming
+ * @Date: 2022-03-09 22:23:19
+ * @LastEditTime: 2022-03-09 22:23:19
+ * @FilePath: \13-canvas\02-代码手敲\01.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* canvas{
+            width: 1200px;
+            height: 1200px;
+        } */
+        /* 不要用CSS去设置canvas的宽高,通过属性或代码去设置是可以的 */
+    </style>
+</head>
+
+<body>
+    <canvas id="demo" width="600" height="600">
+       
+    </canvas>
+
+    <script>
+        // 第一步：拿到canvas的标签
+        let canvas = document.querySelector('canvas');
+        canvas.style.border = '1px solid pink';
+        canvas.width = 800;
+        canvas.height = 800;
+        //canvas.style.height = 1200;    //不要这么设置！！这个和style设置效果一样的！！
+        //第二步：拿到canvas的上下文
+        let ctx = canvas.getContext('2d');
+        //3d的话就是webgl了，此处不涉及
+
+        //第3步：绘制
+        ctx.moveTo(100, 100)
+            //移动到点坐标A(100,100)
+        ctx.lineTo(200, 100)
+            //从A点划线到B点(200,100)——这样就完成了一条直线
+        ctx.lineTo(100, 200)
+            //再从B点划线到C点(100,200)——连笔画
+            //注：上面只是描述了一条线，并没有真正画出来
+            // ctx.lineTo(100,100)
+            //这样就画出来了一个闭合的三角形，但这样太费劲了，我们可以用下面的方法来画出来
+        ctx.closePath(); //这个方法可以自动闭合路径
+
+        //设置线宽
+        ctx.lineWidth = 4;  //线宽4像素，2像素靠外，2像素靠内
+        ctx.strokeStyle = 'red' //也可以使用rgba
+        //注：一定要在stroke之前设置描边的样式，否则没有效果
+        ctx.stroke(); //stroke：描边的意思
+        //使用stroke才真正的画出来了
+        //设置填充的颜色(默认是黑色)
+        ctx.fillStyle = 'orange'
+        //填充你规划好的路径
+        ctx.fill()
+    </script>
+</body>
+
+</html>

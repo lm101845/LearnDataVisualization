@@ -1,0 +1,55 @@
+<!--
+ * @Author: liming
+ * @Date: 2022-03-12 17:33:19
+ * @LastEditTime: 2022-03-12 17:33:20
+ * @FilePath: \01-Canvas\02-代码手敲\02-表格.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="container">
+        <canvas id="cavsElem">
+            你的浏览器不支持canvas，请升级浏览器
+        </canvas>
+    </div>
+    <script>
+        (function() {
+            let canvas = document.querySelector("#cavsElem");
+            let ctx = canvas.getContext("2d");
+
+            canvas.width = 600;
+            canvas.height = 600;
+            canvas.style.border = "1px solid #000";
+
+            let rectangeHeight = 10;
+            let rectangeWidth = 10;
+            ctx.lineWidth = 0.5;
+            //绘制表格
+            //第一步：绘制横线
+            for (let i = 0; i < canvas.width / rectangeHeight; i++) {
+                ctx.moveTo(0,i * rectangeHeight);  
+                //如果不设置moveTo,则当前画笔就没有位置了！！此时第一个lineTo就相当于moveTo
+                ctx.lineTo(canvas.width,i * rectangeHeight);
+                //第二步：绘制竖线
+                ctx.moveTo(i * rectangeWidth,0);
+                ctx.lineTo(i * rectangeWidth,canvas.height);
+            }
+            ctx.stroke()
+            // ctx.beginPath();
+            // ctx.moveTo(0,0);
+
+            // ctx.closePath();
+            // ctx.stroke();
+        }())
+    </script>
+</body>
+
+</html>
